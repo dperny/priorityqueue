@@ -4,7 +4,7 @@ from priorityqueue import *
 import random
 
 class gatekeeper:
-    def __init__(self,maxins):
+    def __init__(self,maxins,ticktime):
         random.seed()
         self._maxInCount = maxins
         self._incounter = 0
@@ -31,6 +31,7 @@ class gatekeeper:
 def main(argv):
     p_queue = PriorityQueue(argv[0],argv[1])
     keeper = gatekeeper(argv[0])
+
 
 
 
