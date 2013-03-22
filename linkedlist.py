@@ -9,7 +9,7 @@ class LinkedList:
 			self._headNode = None
 			self._tailNode = None
 		else:
-			self._headNode = Node(value,None)
+			self._headNode = Node(None,value,None)
 			self._tailNode = self._headNode
 			self._size = 1
 
@@ -42,12 +42,12 @@ class LinkedList:
 			self._headNode.next().setPrev(self._headNode)
 		# if the headNode has tail None (is the last node)
 		# then it IS tailNode
-		if(self._headNode.next() == None):
+		if self._headNode.next() is None:
 			self._tailNode = self._headNode
 		self._size += 1
 
 	def backadd(self,value):
-		if(self._headNode == None):
+		if self._headNode is None:
 			self.frontadd(value)
 			return
 		self._tailNode.setNext(Node(self._tailNode,value,None))
@@ -93,27 +93,18 @@ class LinkedList:
 	def frontremove(self):
 		rval = self._headNode.value()
 		self._headNode = self._headNode.next()
-		self._headNode.setPrev(None)
+		if self._headNode is not None:
+			self._headNode.setPrev(None)
 		self._size -= 1
-		return rval
-
-	def backremove(self):
-		rval = self._tailNode.head()
-		walk = self._headNode
-
-		while(walk.tail() != self._tailNode):
-			walk = walk.tail()
-
-		self._tailNode = walk
-		self._tailNode.setTail(None)
-		self._size -= 1
-
 		return rval
 
 	def backremove(self):
 		rval = self._tailNode.value()
 		self._tailNode = self._tailNode.prev()
-		self._tailNode.setNext(None)
+		if self._tailNode is not None:
+			self._tailNode.setNext(None)
+
+		return rval
 
 	def extract(self):
 		if(self._headNode == None):

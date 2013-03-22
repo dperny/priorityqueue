@@ -31,7 +31,7 @@ class PriorityQueue:
 
     def dequeue(self):
         """removes the highest priority item from the queue"""
-        for i in range(len(self._store),0,-1):
+        for i in range(len(self._store)-1,-1,-1):
             if not self._store[i].isEmpty():
                 self._size -= 1
                 return self._store[i].dequeue()
@@ -43,3 +43,13 @@ class PriorityQueue:
             if self._store[i].isEmpty() is False:
                 self._store[i].discard()
         self._size -= 1
+
+    def extract(self):
+        rlist = []
+        for i in range(len(self._store)):
+            rlist.append(self._store[i].extract())
+        return rlist
+
+    def __str__(self):
+        
+

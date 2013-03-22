@@ -1,17 +1,24 @@
 class Node:
 
-    def __init__(self,head,tail):
-        self._head = head
-        self._tail = tail
+    def __init__(self,next,value,prev):
+        self._next = next
+        self._value = value
+        self._prev = prev
 
-    def head(self):
-        return self._head
+    def value(self):
+        return self._value
 
-    def tail(self):
-        return self._tail
+    def next(self):
+        return self._next
 
-    def setHead(self,value):
-        self._head = value
+    def prev(self):
+        return self._prev
 
-    def setTail(self,node):
-        self._tail = node
+    def setValue(self,value):
+        self._value = value
+
+    def setNext(self,node):
+        self._next = node
+
+    def setPrev(self,node):
+        self._prev = node

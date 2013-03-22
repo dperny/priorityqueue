@@ -34,5 +34,5 @@ class queue(object):
         self._size -= 1
         return self._store.backremove()
 
-    def visualize(self):
+    def extract(self):
         return self._store.extract()
