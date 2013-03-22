@@ -1,4 +1,5 @@
 from queue import *
+from collections import deque
 
 class PriorityQueue:
     """A python3 class implementing a naive priority queue
@@ -19,15 +20,19 @@ class PriorityQueue:
 
     def enqueue(self,packet):
         """adds an item to the queue. if the queue is full, 
-        removes the lowest priority item"""
+        removes the lowest priority item and return that item
+        else returns None"""
 
+        rval = None
         # if we're already at capacity
         if self._size == self._capacity:
             # discard the lowest priority item
-            self._discard()
+            rval = self._discard()
         # enqueue into the queue based on the priority value of the packet
         self._store[packet[0]].enqueue(packet) 
         self._size += 1
+
+        return rval
 
     def dequeue(self):
         """removes the highest priority item from the queue"""
@@ -40,9 +45,11 @@ class PriorityQueue:
     def _discard(self):
         """private function that removes the lowest priority item"""
         for i in range(len(self._store)):
-            if self._store[i].isEmpty() is False:
-                self._store[i].discard()
+            if not self._store[i].isEmpty():
+                rval = self._store[i].discard()
+                break
         self._size -= 1
+        return rval
 
     def extract(self):
         rlist = []
@@ -50,6 +57,8 @@ class PriorityQueue:
             rlist.append(self._store[i].extract())
         return rlist
 
-    def __str__(self):
-        
-
+    def isEmpty(self):
+        if self._size == 0:
+            return True
+        else:
+            return False
