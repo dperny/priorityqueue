@@ -4,7 +4,7 @@ class LinkedList:
 
 	def __init__(self,value = None):
 		# if no value is passed in
-		if(value == None):
+		if(value is None):
 			self._size = 0
 			self._headNode = None
 			self._tailNode = None
@@ -37,20 +37,18 @@ class LinkedList:
 		walk.setValue(value)
 
 	def frontadd(self,value):
-		if self._headNode is None:
-			self._headNode = Node(None,value,None)
-			self._tailNode = self._headNode
-		else:
-			self._headNode = Node(None,value,self._headNode)
-			self._headNode
+		self._headNode = Node(None,value,self._headNode)
 		self._size += 1
+		if self._size == 1:
+			self._tailNode = self._headNode
 
 	def backadd(self,value):
 		if self._tailNode is None:
 			self.frontadd(value)
-			return
-		self._tailNode.setNext(Node(self._tailNode,value,None))
-		self._tailNode = self._tailNode.next()
+		else:
+			self._tailNode.setNext(Node(self._tailNode,value,None))
+			self._tailNode = self._tailNode.next()
+			self._size += 1
 
 	def indexadd(self,index,value):
 		if index == 0:
@@ -89,11 +87,9 @@ class LinkedList:
 
 	def frontremove(self):
 		if self._headNode is None:
-			print("something broke (empty node)")
 			return None
 		assert self._headNode.value() is not None
 		rval = self._headNode.value()
-		assert rval is not None
 		self._headNode = self._headNode.next()
 		if self._headNode is not None:
 			self._headNode.setPrev(None)
@@ -127,10 +123,7 @@ class LinkedList:
 		return rlist
 
 	def isEmpty(self):
-		if self._size == 0:
-			return True
-		else:
-			return False
+		return self._size == 0
 
 	def size(self):
 		return self._size
