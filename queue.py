@@ -1,24 +1,23 @@
 from linkedlist import *
-from collections import deque
 
 class queue(object):
     """docstring for Queue"""
     def __init__(self):
-        self._store = deque()
+        self._store = LinkedList()
         self._size = 0
 
     def enqueue(self,value):
-        self._store.appendleft(value)
+        self._store.backadd(value)
         self._size += 1
 
     def dequeue(self):
         if(self.isEmpty()):
             raise SizeError("queue is empty")
         self._size -= 1
-        return self._store.pop()
+        return self._store.frontremove()
 
     def peek(self):
-        return self._store[0]
+        return self._store.get(0)
 
     def size(self):
         return self._size 
@@ -33,7 +32,7 @@ class queue(object):
         if self.isEmpty():
             raise SizeError("queue is empty")
         self._size -= 1
-        return self._store.popleft()
+        return self._store.backremove()
 
     def extract(self):
-        return list(self._store) 
+        return self._store.extract()
