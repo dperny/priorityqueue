@@ -3,7 +3,7 @@ from linkedlist import *
 class queue(object):
     """docstring for Queue"""
     def __init__(self):
-        self._store = LinkedList()
+        self._store = dlinkedlist()
         self._size = 0
 
     def enqueue(self,value):
@@ -12,7 +12,7 @@ class queue(object):
 
     def dequeue(self):
         if(self.isEmpty()):
-            raise SizeError("queue is empty")
+            return None
         self._size -= 1
         return self._store.frontremove()
 
@@ -30,7 +30,7 @@ class queue(object):
 
     def discard(self):
         if self.isEmpty():
-            raise SizeError("queue is empty")
+            return None
         self._size -= 1
         return self._store.backremove()
 
