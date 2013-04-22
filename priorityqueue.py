@@ -14,7 +14,7 @@ class PriorityQueue:
     def __init__(self,capacity,levels):
         self._store = [None] * levels
         self._capacity = capacity
-        self._size = 0
+        self.size = 0
         for i in range(levels):
             self._store[i] = queue()
 
@@ -25,12 +25,12 @@ class PriorityQueue:
 
         rval = None
         # if we're already at capacity
-        if self._size == self._capacity:
+        if self.size == self._capacity:
             # discard the lowest priority item
             rval = self._discard()
         # enqueue into the queue based on the priority value of the packet
         self._store[packet[0]].enqueue(packet) 
-        self._size += 1
+        self.size += 1
 
         return rval
 
@@ -38,7 +38,7 @@ class PriorityQueue:
         """removes the highest priority item from the queue"""
         for i in range(len(self._store)-1,-1,-1):
             if not self._store[i].isEmpty():
-                self._size -= 1
+                self.size -= 1
                 return self._store[i].dequeue()
         return None
 
@@ -48,7 +48,7 @@ class PriorityQueue:
             if not self._store[i].isEmpty():
                 rval = self._store[i].discard()
                 break
-        self._size -= 1
+        self.size -= 1
         return rval
 
     def extract(self):
@@ -58,7 +58,7 @@ class PriorityQueue:
         return rlist
 
     def isEmpty(self):
-        if self._size == 0:
+        if self.size == 0:
             return True
         else:
             return False
